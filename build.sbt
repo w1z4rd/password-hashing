@@ -1,4 +1,4 @@
-name         := """scala-authentication"""
+name         := """password-hashing"""
 version      := "0.1.0-SNAPSHOT"
 organization := "costa"
 

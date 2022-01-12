@@ -6,13 +6,6 @@ import DefaultPasswordEncoder._
 
 sealed class DefaultPasswordEncoder extends PasswordEncoder {
 
-  private val SALT_BYTE_SIZE: Short = 32;
-  private val HASH_BYTE_SIZE: Short = 30;
-  private val PBKDF2_ITERATIONS: Int = 19973;
-  private val PBKDF2_ALGORITHM: String = "PBKDF2WithHmacSHA384";
-  private val SALT_GENERATOR: SecureRandom =
-    SecureRandom.getInstance("SHA1PRNG");
-
   def encode(password: Array[Char]): Password = {
     SALT_GENERATOR setSeed System.currentTimeMillis()
     val salt: Array[Byte] = new Array[Byte](SALT_BYTE_SIZE)
@@ -51,6 +44,13 @@ sealed class DefaultPasswordEncoder extends PasswordEncoder {
 }
 
 object DefaultPasswordEncoder {
+
+  private val SALT_BYTE_SIZE: Short = 32;
+  private val HASH_BYTE_SIZE: Short = 30;
+  private val PBKDF2_ITERATIONS: Int = 19973;
+  private val PBKDF2_ALGORITHM: String = "PBKDF2WithHmacSHA384";
+  private val SALT_GENERATOR: SecureRandom =
+    SecureRandom.getInstance("SHA1PRNG");
 
   private def toHex(array: Array[Byte]): String = {
     Base64.getEncoder.encodeToString(array)
